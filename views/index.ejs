@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Mini Messge Board</title>
+  </head>
+  <body>
+    <h1>home is where you are</h1>
+    <p>God let me marry her</p>
+
+    <ul>
+    <% messages.forEach((message) => { %>
+        <li><strong><%= message.user %>:</strong> <%= message.text %></li>
+    <% }); %>
+    </ul>
+
+  </body>
+</html>
