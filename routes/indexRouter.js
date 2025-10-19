@@ -25,16 +25,18 @@ const messages = [
   },
 ];
 
-router.get("/", (req, res) => res.render("index", { title: "Mini Messageboard", messages: messages }));
+router.get("/", (req, res) => res.render("index", { messages: messages }));
+
 router.post("/new", (req, res) => {
   const { user, text } = req.body;
   messages.push({ user: user, text: text, added: new Date() });
   res.redirect("/");
 });
+
 router.get("/message/:id", (req, res) => {
   const { id } = req.params;
   const message = messages[id];
-  res.render("message", { title: "Message Details", message: message });
+  res.render("message", { message: message });
 });
 
 module.exports = router;
