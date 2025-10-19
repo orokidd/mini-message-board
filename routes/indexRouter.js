@@ -31,5 +31,10 @@ router.post("/new", (req, res) => {
   messages.push({ user: user, text: text, added: new Date() });
   res.redirect("/");
 });
+router.get("/message/:id", (req, res) => {
+  const { id } = req.params;
+  const message = messages[id];
+  res.render("message", { title: "Message Details", message: message });
+});
 
 module.exports = router;
