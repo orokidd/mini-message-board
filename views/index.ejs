@@ -1,17 +1,35 @@
 <html>
   <head>
     <title>Mini Messge Board</title>
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <h1>home is where you are</h1>
-    <p>God let me marry her</p>
-    <button><a href="/new">New Message</a></button>
+    <div class="header">
+        <h1>Mini Messageboard</h1>
+        <button><a href="/new">New Message</a></button>
+    </div>
 
-    <ul>
-    <% messages.forEach((message) => { %>
-        <li><strong><%= message.user %>:</strong> <%= message.text %> <a href="/message/<%= messages.indexOf(message) %>">[details]</a></li>
-    <% }); %>
-    </ul>
+    <div class="messages">
+        <ul class="messages-list">
+        <% messages.forEach((message) => { %>
+
+            <li class="message">
+                <div class="message-header">
+                    <strong><%= message.user %>:</strong> 
+                </div>
+
+                <div class="message-content">
+                    <p><%= message.text %> </p>
+                </div>
+                
+                <div class="message-footer">
+                    <a href="/message/<%= messages.indexOf(message) %>">[details]</a>
+                </div>
+            </li>
+
+        <% }); %>
+        </ul>
+    </div>
 
   </body>
 </html>
