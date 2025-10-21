@@ -122,7 +122,7 @@ body {
   border-top-right-radius: 12px;
 }
 
-.message-header > h2 {
+.message-header > h3 {
   color: white;
 }
 
