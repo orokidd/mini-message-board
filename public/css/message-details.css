@@ -103,3 +103,9 @@ body {
 .back-button:hover {
     background-color: rgb(241, 241, 241);
 }
+
+@media screen and (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+}
