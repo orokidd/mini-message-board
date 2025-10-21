@@ -1,14 +1,31 @@
 <html>
   <head>
     <title>Mini Messge Board</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/message-details.css">
   </head>
   <body>
-    <h1>Message details</h1>
-    <p><strong>User:</strong> <%= message.user %></p>
-    <p><strong>Message:</strong> <%= message.text %></p>
-    <p><strong>Added:</strong> <%= message.added.toLocaleString() %></p>
-    <button><a href="/">Back to Home</a></button>
+    <h1 class="message-details-header">Message details</h1>
+    <div class="details-container">
+      <div class="detail-content">
+        <p class="content-header">FROM</p>
+        <p><%= message.user %></p>
+      </div>
 
+      <div class="detail-content">
+        <p class="content-header">MESSAGE</p>
+        <p><%= message.text %></p>
+      </div>
+
+      <div class="detail-content">
+        <p class="content-header">POSTED</p>
+        <p><%= message.added.toLocaleString() %></p>
+      </div>
+    </div>
+
+    <div class="back-container">
+      <a href="/" class="back-button">
+        Back to Messages
+      </a>
+    </div>
   </body>
 </html>
