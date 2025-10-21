@@ -6,7 +6,10 @@
   <body>
     <div class="header">
         <h1>Mini Messageboard</h1>
-        <button><a href="/new">New Message</a></button>
+        <button class="new-message-button"><a href="/new">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            New Message
+        </a></button>
     </div>
 
     <div class="messages">
@@ -15,7 +18,7 @@
 
             <li class="message">
                 <div class="message-header">
-                    <strong><%= message.user %>:</strong> 
+                    <h2><%= message.user %></h2>
                 </div>
 
                 <div class="message-content">
@@ -23,7 +26,10 @@
                 </div>
                 
                 <div class="message-footer">
-                    <a href="/message/<%= messages.indexOf(message) %>">[details]</a>
+                    <p class="message-date"><%= message.added.toLocaleDateString() %></p>
+                    <a class="message-detail" href="/message/<%= messages.indexOf(message) %>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
                 </div>
             </li>
 
