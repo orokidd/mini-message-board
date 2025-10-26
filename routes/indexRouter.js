@@ -1,42 +1,44 @@
+require("dotenv").config();
 const { Router } = require("express");
+const pool = require("../db/pool");
 
 const router = Router();
 
-const messages = [
-  {
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date()
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date()
-  },
-    {
-    text: "Nice Car!",
-    user: "Samantha",
-    added: new Date()
-  },
-    {
-    text: "Shut up!",
-    user: "Blake",
-    added: new Date()
-  },
-];
-
-router.get("/", (req, res) => res.render("index", { messages: messages }));
-
-router.post("/new", (req, res) => {
-  const { user, text } = req.body;
-  messages.push({ user: user, text: text, added: new Date() });
-  res.redirect("/");
+router.get("/", async (req, res) => {
+  try {
+    const { rows } = await pool.query("SELECT * FROM messages");
+    res.render("index", { messages: rows });
+  } catch (err) {
+    console.log(err);
+    res.status(500);
+  }
 });
 
-router.get("/message/:id", (req, res) => {
+router.post("/new", async (req, res) => {
+  const { user, text } = req.body;
+  try {
+    await pool.query("INSERT INTO messages (message, username, added) VALUES ($1, $2, $3)", [text, user, new Date()]);
+    res.redirect("/");
+  } catch {
+    console.error("Error inserting message:", err);
+    res.status(500).send("Database insert failed");
+  }
+});
+
+router.get("/message/:id", async (req, res) => {
   const { id } = req.params;
-  const message = messages[id];
-  res.render("message", { message: message });
+  try {
+    const { rows } = await pool.query("SELECT * FROM messages WHERE id = $1", [id]);
+
+    if (rows.length === 0) {
+      return res.status(404).send("Message not found");
+    }
+
+    res.render("message", { message: rows[0] });
+  } catch (err) {
+    console.error("Database error:", err);
+    res.status(500).send("Database query failed");
+  }
 });
 
 module.exports = router;

@@ -18,16 +18,16 @@
 
             <li class="message">
                 <div class="message-header">
-                    <h3><%= message.user %></h3>
+                    <h3><%= message.username %></h3>
                 </div>
 
                 <div class="message-content">
-                    <p><%= message.text %> </p>
+                    <p><%= message.message %> </p>
                 </div>
                 
                 <div class="message-footer">
                     <p class="message-date"><%= message.added.toLocaleDateString() %></p>
-                    <a class="message-detail" href="/message/<%= messages.indexOf(message) %>">
+                    <a class="message-detail" href="/message/<%= message.id %>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>
                 </div>
