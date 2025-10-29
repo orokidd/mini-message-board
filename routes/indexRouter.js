@@ -8,8 +8,9 @@ router.get("/", async (req, res) => {
     const { rows } = await pool.query("SELECT * FROM messages");
     res.render("index", { messages: rows });
   } catch (err) {
-    console.log(err);
-    res.status(500);
+    console.error(err);
+    // send a response so the request doesn't hang and upstream (Railway) won't return 502
+    res.status(500).send('Database query failed');
   }
 });
 
@@ -18,7 +19,7 @@ router.post("/new", async (req, res) => {
   try {
     await pool.query("INSERT INTO messages (message, username, added) VALUES ($1, $2, $3)", [text, user, new Date()]);
     res.redirect("/");
-  } catch {
+  } catch (err) {
     console.error("Error inserting message:", err);
     res.status(500).send("Database insert failed");
   }
